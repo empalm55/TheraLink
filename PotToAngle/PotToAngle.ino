@@ -2,11 +2,8 @@
   AnalogReadSerial
 
   Reads an analog input on pin 0, prints the result to the Serial Monitor.
-  Graphical representation is available using Serial Plotter (Tools > Serial Plotter menu).
-  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
 
-  This example code is in the public domain.
-
+  Some of this is based on a tutorial from Arduino:
   https://www.arduino.cc/en/Tutorial/BuiltInExamples/AnalogReadSerial
 */
 
@@ -20,8 +17,8 @@ void setup() {
 void loop() {
   // read the input on analog pin 0:
   float sensorValue = analogRead(A0);
-  float angle=(sensorValue/1023)*265;
-  // print out the value you read:
+  float angle=(sensorValue/1023)*265; //total angle range of potentiometer I am using is about 265 degrees
+  // print out the value read:
   Serial.println(angle);
   delay(1000);  // delay in between reads for stability
 }
