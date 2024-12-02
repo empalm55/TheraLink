@@ -9,7 +9,7 @@ float force; //calculated later based on force sensor value
 #define redLED 7 //digital pin for red LED, which will indicate whether data is being collected
 #define blueLED 8 //digital pin for blue LED, which will indicate whether bluetooth is connected
 
-SoftwareSerial dataStream(2,3); //initialize RX and TX pins (reciever and transmitter)
+SoftwareSerial dataStream(8,7); //initialize RX and TX pins (reciever and transmitter)
 
 // the setup routine runs once when you press reset:
 void setup() {
