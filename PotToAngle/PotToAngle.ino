@@ -5,9 +5,7 @@ float forceSensorValue; //straight value from force sensor
 float angle; //calculated later on based on angle sensor value
 float force; //calculated later based on force sensor value
 #define potPin A0 //analog pin for potentiometer
-#define forcePin A3 //analog pin for force sensor
-#define redLED 7 //digital pin for red LED, which will indicate whether data is being collected
-#define blueLED 8 //digital pin for blue LED, which will indicate whether bluetooth is connected
+#define forcePin A3 //analog pin for force sensor; currently represented by potentiometer
 
 SoftwareSerial dataStream(8,7); //initialize RX and TX pins (reciever and transmitter)
 
