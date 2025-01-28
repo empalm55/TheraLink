@@ -1,4 +1,3 @@
-
 #include <Arduino.h> 
 #include "HX711.h" //library installable withing Arduino IDE, authored by Bogdan Necula
 
@@ -9,51 +8,20 @@ HX711 scale;
 
 void setup() {
   Serial.begin(57600);
-  Serial.println("HX711 Demo");
-  Serial.println("Initializing the scale");
+  Serial.println("Initializing sensor. Do not apply pressure to sensor.");
 
-  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-
-  Serial.println("Before setting up the scale:");
-  Serial.print("read: \t\t");
-  Serial.println(scale.read());    
-
-  Serial.print("read average: \t\t");
-  Serial.println(scale.read_average(20)); 
-
-  Serial.print("get value: \t\t");
-  Serial.println(scale.get_value(5)); 
-
-  Serial.print("get units: \t\t");
-  Serial.println(scale.get_units(5), 1);  
-      
+  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
             
-  scale.set_scale(44561);
+  scale.set_scale(44561); //calibration factor to measure in pounds *for this particular load cell*
 
   scale.tare();               
 
-  Serial.println("After setting up the scale:");
-
-  Serial.print("read: \t\t");
-  Serial.println(scale.read());                 
-
-  Serial.print("read average: \t\t");
-  Serial.println(scale.read_average(20));       
-
-  Serial.print("get value: \t\t");
-  Serial.println(scale.get_value(5));   
-
-  Serial.print("get units: \t\t");
-  Serial.println(scale.get_units(5), 1);        
-
+  Serial.println("Initialization Complete. Begin Test.");       
   Serial.println("Readings:");
 }
 
 void loop() {
   Serial.print("one reading:\t");
-  Serial.print(scale.get_units(), 1);
-  Serial.print("\t| average:\t");
-  Serial.println(scale.get_units(10), 5);
-
-  delay(5000);
-}
+  Serial.println(scale.get_units(), 1);
+  delay(2000);
+}  
