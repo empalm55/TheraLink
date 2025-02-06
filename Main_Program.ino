@@ -47,4 +47,17 @@ void loop() {
       }
     Serial.println("Data Collection Stopped.");
   }
+  if (Serial.read()=='r'){ //this will re-tare the load cell and reinitialize
+    Serial.println("Initializing sensor. Do not apply pressure to sensor.");
+
+    scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
+
+    scale.tare();               
+
+    Serial.println("Initialization Complete. Begin Test.");
+  }
+  if (Serial.available()==false){
+    digitalWrite(readyLED, LOW);
+  }
+  delay(100);
  }
