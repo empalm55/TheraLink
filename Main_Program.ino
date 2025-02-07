@@ -2,7 +2,6 @@
 #include <HX711.h>
 
 float angleSensorValue; //straight value from potentiometer
-float forceSensorValue; //straight value from force sensor
 int angle; //calculated later on based on angle sensor value
 #define potPin A0 //analog pin for potentiometer
 const int LOADCELL_DOUT_PIN = 2; //digital pin for output of load cell
