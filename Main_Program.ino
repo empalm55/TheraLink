@@ -10,6 +10,7 @@
 
 float angleSensorValue; //straight value from potentiometer
 int angle; //calculated later on based on angle sensor value
+char input_val; //input character (a, f, s, or r)
 
 HX711 scale; //define name for load cell
 
@@ -32,7 +33,7 @@ void setup() {
 
   scale.tare();               
 
-  delay(15000);
+  delay(10000);
   
   Serial.println("Initialization Complete. Begin Test."); 
   
@@ -40,8 +41,10 @@ void setup() {
 }
 
 // the loop routine runs over and over again while power is on:
-void loop() {                         
-  if (Serial.read()=='a'){ 
+void loop() {
+  input_val = Serial.read();
+  
+  if (input_val=='a'){ 
     Serial.println("Received instructions");
      while(Serial.read() != 's'){  //until you tell it to stop
        setColor(0,0,0); //turn off LED
@@ -55,7 +58,7 @@ void loop() {
     Serial.println("Data collection stopped");
     setColor(0,100,0); //set LED to green
   }
-  if (Serial.read()=='f'){ 
+  else if (input_val=='f'){ 
     Serial.println("Recieved instructions");
      while(Serial.read() != 's'){  //until you tell it to stop
        setColor(0,0,0); //turn LED off
@@ -68,18 +71,20 @@ void loop() {
     Serial.println("Data Collection Stopped.");
     setColor(0,100,0);
   }
-  if (Serial.read()=='r'){ //this will re-tare the load cell and reinitialize
+  else if (input_val=='r'){ //this will re-tare the load cell and reinitialize
     setColor(255,50,0);
-    Serial.println("Initializing sensor. Do not apply pressure to sensor.");
+    Serial.println("Re-initializing sensor. Do not apply pressure to sensor.");
 
     scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
 
     scale.tare();               
-    delay(15000);
-    Serial.println("Initialization Complete. Begin Test.");
+    delay(10000);
+    Serial.println("Re-initialization Complete.");
     setColor(0,100,0);
   }
+  else{
   delay(100);
+  }
  }
 
 void setColor(int redValue, int greenValue, int blueValue){
