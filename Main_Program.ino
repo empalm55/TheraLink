@@ -10,7 +10,7 @@
 
 float angleSensorValue; //straight value from potentiometer
 int angle; //calculated later on based on angle sensor value
-char input_val; //input character (a, f, s, or r)
+char input_val; //input character (a, f, s, z, or r)
 
 HX711 scale; //define name for load cell
 
