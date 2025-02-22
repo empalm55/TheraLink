@@ -10,6 +10,7 @@
 
 float angleSensorValue; //straight value from potentiometer
 int angle; //calculated later on based on angle sensor value
+int angley; //this is the zero point of the potentiometer
 char input_val; //input character (a, f, s, z, or r)
 
 HX711 scale; //define name for load cell
@@ -20,6 +21,8 @@ void setup() {
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   pinMode(potPin,INPUT); //potentiometer
+
+  angley=analogRead(potPin);
   
   Serial.begin(57600); //initialize serial monitor
 
@@ -51,7 +54,7 @@ void loop() {
        delay(500);
        setColor(255,0,0); //set LED to red
        angleSensorValue = analogRead(potPin); //read the input on the potentiometer:
-      angle=((angleSensorValue-720)/(-4.13));
+      angle=((angleSensorValue-angley)/(-4.13));
       Serial.println(angle); // print out the value calculated
       delay(500);
      }
@@ -81,6 +84,9 @@ void loop() {
     delay(10000);
     Serial.println("Re-initialization Complete.");
     setColor(0,100,0);
+  }
+  else if (input_val=='z'){
+    angley=analogRead(potPin);
   }
   else{
   delay(100);
