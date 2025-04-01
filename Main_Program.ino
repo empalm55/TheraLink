@@ -23,21 +23,8 @@ void setup() {
   
   Serial.begin(57600); //initialize serial monitor
 
-  setColor(255,50,0); //set to yellow during initialization
- 
-  Serial.println("Initializing sensor...");
-
-  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
+  setColor(0,100,0);
   
-  scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
-
-  scale.tare();               
-
-  delay(10000);
-  
-  Serial.println("Initialization Complete. Begin Test."); 
-  
-  setColor(0,100,0); //set to green for ready
 }
 
 // the loop routine runs over and over again while power is on:
@@ -60,7 +47,24 @@ void loop() {
   }
   else if (input_val=='f'){ 
     Serial.println("Recieved instructions");
-     while(Serial.read() != 's'){  //until you tell it to stop
+    
+    setColor(255,50,0); //set to yellow during initialization
+ 
+    Serial.println("Initializing sensor...");
+
+    scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
+  
+    scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
+
+    scale.tare();               
+
+    delay(10000);
+  
+    Serial.println("Initialization Complete. Begin Test."); 
+  
+    setColor(0,100,0); //set to green for ready
+    
+    while(Serial.read() != 's'){  //until you tell it to stop
        setColor(0,0,0); //turn LED off
        delay(500);
        setColor(0,100,0);
