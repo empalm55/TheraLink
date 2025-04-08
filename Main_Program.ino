@@ -23,8 +23,18 @@ void setup() {
   
   Serial.begin(57600); //initialize serial monitor
 
-  setColor(0,100,0);
+  setColor(255,50,0);
+    Serial.println("Initializing. Do not apply pressure to sensor.");
+
+    scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
   
+    scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
+    
+    scale.tare();               
+    delay(1000);
+    Serial.println("Initialization Complete.");
+  
+  setColor(0,100,0);
 }
 
 // the loop routine runs over and over again while power is on:
@@ -52,10 +62,6 @@ void loop() {
  
     Serial.println("Remove all pressure from sensor. Initializing...");
 
-    scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
-  
-    scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
-
     scale.tare();               
 
     delay(1000);
@@ -79,8 +85,10 @@ void loop() {
     setColor(255,50,0);
     Serial.println("Re-initializing sensor. Do not apply pressure to sensor.");
 
+    scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
+  
     scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
-
+    
     scale.tare();               
     delay(1000);
     Serial.println("Re-initialization Complete.");
