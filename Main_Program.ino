@@ -50,7 +50,7 @@ void loop() {
     
     setColor(255,50,0); //set to yellow during initialization
  
-    Serial.println("Initializing sensor...");
+    Serial.println("Remove all pressure from sensor. Initializing...");
 
     scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
   
@@ -58,7 +58,7 @@ void loop() {
 
     scale.tare();               
 
-    delay(10000);
+    delay(1000);
   
     Serial.println("Initialization Complete. Begin Test."); 
   
@@ -67,7 +67,7 @@ void loop() {
     while(Serial.read() != 's'){  //until you tell it to stop
        setColor(0,0,0); //turn LED off
        delay(500);
-       setColor(0,100,0);
+       setColor(250,0,0);
       Serial.print(scale.get_units(), 1);
       Serial.println("  lbs.");
       delay(500);
@@ -82,7 +82,7 @@ void loop() {
     scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
 
     scale.tare();               
-    delay(10000);
+    delay(1000);
     Serial.println("Re-initialization Complete.");
     setColor(0,100,0);
   }
