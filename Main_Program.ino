@@ -28,7 +28,7 @@ void setup() {
 
     scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);      
   
-    scale.set_scale(44357); //calibration factor to measure in pounds *for this particular load cell*
+    scale.set_scale(44456); //calibration factor to measure in pounds *for this particular load cell*
     
     scale.tare();               
     delay(1000);
